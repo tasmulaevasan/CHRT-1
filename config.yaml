@@ -1,0 +1,81 @@
+ver:
+  cls: 0
+  mlm: 4
+seed: 42
+device: cuda
+vocab_size: null
+emb_dim: 512
+n_heads: 8
+n_layers: 8
+ff_dim: 2048
+dropout: 0.1
+max_len: 486
+use_swiglu: true
+use_rms_norm: true
+drop_path_rate: 0.05
+cls_dropout: 0.3
+num_classes: 10
+num_workers: 4
+prefetch_factor: 4
+grad_accum_steps: 4
+patience: 3
+warmup_frac: 0.05
+print_every: 50
+max_grad_norm: 1.0
+label_smoothing: 0.1
+mlm:
+  batch_size: 32
+  lr: 0.0008
+  epochs: 3
+  mask_prob: 0.15
+  weight_decay: 0.01
+  use_dynamic_padding: true
+  fp16: true
+cls:
+  batch_size: 64
+  lr_encoder: 1.0e-05
+  lr_head: 0.001
+  epochs: 30
+  weight_decay: 0.01
+  freeze_encoder_epochs: 0
+  use_class_weights: true
+  fp16: true
+templates:
+  name: CHRT_1_{ver}_{mode}_{date}
+  date: '%Y_%m_%d'
+paths:
+  data: D:\Projects\CHRT-1\data
+  outputs: D:\Projects\CHRT-1\outputs
+  processed: D:\Projects\CHRT-1\data\processed
+  raw: D:\Projects\CHRT-1\data\raw
+  cls_test: D:\Projects\CHRT-1\data\processed\test.csv
+  cls_train: D:\Projects\CHRT-1\data\processed\train.csv
+  cls_train_full: D:\Projects\CHRT-1\data\processed\train_full.csv
+  cls_val: D:\Projects\CHRT-1\data\processed\val.csv
+  dataseta: D:\Projects\CHRT-1\data\raw\dataSetA.csv
+  datasetb: D:\Projects\CHRT-1\data\raw\dataSetB.csv
+  uspto_31k: D:\Projects\CHRT-1\data\raw\mech-USPTO-31k.csv
+  raw_test: D:\Projects\CHRT-1\data\raw\raw_test.csv
+  raw_train: D:\Projects\CHRT-1\data\raw\raw_train.csv
+  raw_val: D:\Projects\CHRT-1\data\raw\raw_val.csv
+  uspto_tpl_test: D:\Projects\CHRT-1\data\raw\uspto_1k_TPL_test.csv
+  uspto_tpl_train: D:\Projects\CHRT-1\data\raw\uspto_1k_TPL_train.csv
+  corpus: D:\Projects\CHRT-1\data\corpus.txt
+  tokenizer: D:\Projects\CHRT-1\data\tokenizer.pkl
+  classes: D:\Projects\CHRT-1\data\classes.pickle
+  mlm_checkpoint: D:\Projects\CHRT-1\None
+  cls_checkpoint: D:\Projects\CHRT-1\None
+wandb:
+  enabled: false
+  project: chrt
+  entity: null
+cuda:
+  benchmark: true
+  deterministic: false
+augmentation:
+  enabled: true
+  prob: 0.5
+  mode: smiles
+ema:
+  enabled: false
+  decay: 0.9999
