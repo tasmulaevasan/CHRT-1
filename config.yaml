@@ -1,0 +1,75 @@
+seed:                    42
+device:                  cuda
+num_workers:             4
+print_every:             50
+
+ver:
+  cls:                   5
+  mlm:                   5
+
+templates:
+  name:                  CHRT_1_v{ver}_{mode}_{date}
+  date:                  '%Y%m%d_%H%M'
+
+paths:
+  data:                  data
+  outputs:               outputs
+  processed:             data/processed
+  raw:                   data/raw
+  cls_test:              data/processed/test.csv
+  cls_train:             data/processed/train.csv
+  cls_train_full:        data/processed/train_full.csv
+  cls_val:               data/processed/val.csv
+  dataseta:              data/raw/dataSetA.csv
+  datasetb:              data/raw/dataSetB.csv
+  uspto_31k:             data/raw/mech-USPTO-31k.csv
+  raw_test:              data/raw/raw_test.csv
+  raw_train:             data/raw/raw_train.csv
+  raw_val:               data/raw/raw_val.csv
+  uspto_tpl_test:        data/raw/uspto_1k_TPL_test.csv
+  uspto_tpl_train:       data/raw/uspto_1k_TPL_train.csv
+  corpus:                data/corpus.txt
+  tokenizer:             data/tokenizer.pkl
+  classes:               data/classes.pickle
+
+vocab_size:              2572
+emb_dim:                 768
+n_heads:                 12
+n_layers:                10
+ff_dim:                  3072
+max_len:                 600
+dropout:                 0.4
+drop_path_rate:          0.15
+label_smoothing:         0.2
+max_grad_norm:           1
+grad_accum_steps:        8
+warmup_frac:             0.15
+patience:                14
+prefetch_factor:         8
+num_classes:             18
+ema_decay:               0.995
+mask_prob:               0.15
+
+mlm:
+  batch_size:            32
+  lr:                    0.0001
+  epochs:                3
+  weight_decay:          0.01
+  use_dynamic_padding:   true
+  fp16:                  true
+
+cls:
+  batch_size:            32
+  lr_encoder:            5e-05
+  lr_head:               0.0015
+  epochs:                60
+  dropout:               0.5
+  weight_decay:          0.1
+  freeze_encoder_epochs: 0
+  use_class_weights:     true
+  fp16:                  true
+
+wandb:
+  enabled:               true
+  entity:                null
+  watch_model:           false
